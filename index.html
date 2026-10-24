@@ -51,7 +51,7 @@
 
     section {
       margin-bottom: 48px;
-      scroll-margin-top: 120px;
+      scroll-margin-top: 170px;
     }
 
     h2 {
@@ -85,6 +85,47 @@
     footer a {
       color: white;
     }
+
+    #night-btn {
+      margin-top: 12px;
+      background: white;
+      color: #1d4e89;
+      border: 0;
+      padding: 6px 12px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    body.night {
+      background: #1a1d23;
+      color: #f3efe8;
+    }
+
+    body.night a { color: #9ec5f0; }
+
+    body.night header,
+    body.night footer {
+      background: #12151a;
+    }
+
+    body.night nav a,
+    body.night footer,
+    body.night footer a {
+      color: white;
+    }
+
+    body.night h2 { border-bottom-color: #9ec5f0; }
+
+    body.night .card {
+      background: #262b33;
+      border-color: #3a4150;
+      color: #f3efe8;
+    }
+
+    body.night #night-btn {
+      background: #f3efe8;
+      color: #12151a;
+    }
   </style>
 </head>
 <body>
@@ -97,6 +138,7 @@
         <a href="#projects">My Projects</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button type="button" id="night-btn">Night mode</button>
     </div>
   </header>
 
@@ -130,9 +172,27 @@
   </main>
 
   <footer>
-  <div class="wrap">
-   <p>© 2026 Tesfamichael Paulos. All Rights Reserved.</p>
+    <div class="wrap">
+      <p>© 2026 Tesfamichael Paulos. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <script>
+    var button = document.getElementById("night-btn");
+
+    function setNight(on) {
+      document.body.classList.toggle("night", on);
+      button.textContent = on ? "Day mode" : "Night mode";
+      localStorage.setItem("night", on ? "on" : "off");
+    }
+
+    if (localStorage.getItem("night") === "on") {
+      setNight(true);
+    }
+
+    button.addEventListener("click", function () {
+      setNight(!document.body.classList.contains("night"));
+    });
+  </script>
 </body>
 </html>
